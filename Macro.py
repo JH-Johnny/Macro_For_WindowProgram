@@ -82,7 +82,7 @@ data_x = df["소재(지번)"].to_list()
 # (Edit27, 좌표계 검색 결과)
 # Macro Code
 box = []
-for i in data_x[:3]:
+for i in data_x:
     input_data(i, "Edit2")
     gui.click(get_coordinate("Button7"))
     searched_coordinate = dialog.Edit27.wrapper_object().window_text()
