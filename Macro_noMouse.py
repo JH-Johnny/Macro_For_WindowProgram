@@ -8,8 +8,11 @@ import pandas as pd
 # used program name = 'GeocodingTool64.exe'
 # used program download url = http://www.biz-gis.com/index.php?mid=pds&document_srl=187250
 app = App.Application()
-win_program = input("프로그램 경로와 이름은 무엇입니까? (C:\\Users\\??\\Desktop\\???.exe)\n>>>")
 # C:\Users\??\Desktop\GeocodingTool64_20220811\GeocodingTool64.exe
+win_program = input("프로그램 경로와 이름은 무엇입니까? (C:\\Users\\??\\Desktop\\???.exe)\n>>> ")
+file_path = input("추출할 대상 파일을 지정해 주세요. (C:\\Users\\??\\Desktop\\???.xlsx)\n>>> ")
+save_path = input("추출한 파일을 저장할 경로를 입력해 주세요. (C:\\Users\\??\\Desktop)\n>>> ")
+
 app.start(win_program)
 
 # Program Information Get
@@ -37,7 +40,7 @@ if btn_check_state("button3") == 0:
     dialog.button3.wrapper_object().click()
 
 # Data read
-df = pd.read_excel(r"C:\Users\??\Desktop\03. 서천군 음식점정보_v2.0.xlsx")
+df = pd.read_excel(r"{}".format(file_path))
 data_x = df["주소(지번)"].to_list()
 
 # Dict information for Tree_name = (button3, 경위도 버튼) (Edit2, 입력주소 입력상자) (Button7, 한 건씩 처리 버튼)
@@ -58,7 +61,7 @@ for i in data_x:
     box.append(searched_coordinate)
 
 result_value = pd.DataFrame(box, columns=["우편번호"])
-result_value.to_excel(r"C:\Users\??\Desktop\우편번호_추출.xlsx", index=False)
+result_value.to_excel(r"{}\우편번호_추출.xlsx".format(save_path), index=False)
 
 # Program exit
 app.kill(soft=True)
